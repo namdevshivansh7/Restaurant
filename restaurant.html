@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Masala Mandala — Authentic Indian Cuisine / मसाला मंडल</title>
+  <meta name="description" content="Masala Mandala — Authentic Indian restaurant. Bilingual menu (English + Hindi), reservations, and reviews.">
+  <!-- Fonts: Poppins, Playfair Display, Noto Sans Devanagari -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Sans+Devanagari:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#fff8f2;
+      --paper:#ffffff;
+      --accent:#7b1f1a; 
+      --accent-2:#f59a20; 
+      --muted:#6b6b6b;
+      --card-shadow: 0 12px 36px rgba(123,31,26,0.08);
+      --radius:14px;
+      --glass: rgba(255,255,255,0.6);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;font-family:'Poppins',system-ui,-apple-system,"Segoe UI",Roboto,Arial;line-height:1.5;color:#222;background:linear-gradient(180deg,#fff8f2 0%, #fff 60%);
+      -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+    }
+
+    a{color:var(--accent);text-decoration:none}
+    header{
+      display:flex;align-items:center;justify-content:space-between;padding:18px 32px;background:linear-gradient(180deg, rgba(123,31,26,0.03), rgba(245,154,32,0.02));position:sticky;top:0;z-index:30;border-bottom:1px solid rgba(0,0,0,0.03);
+    }
+    .brand{display:flex;gap:14px;align-items:center}
+    .logo{
+      width:64px;height:64px;background:conic-gradient(from 120deg, var(--accent-2), var(--accent));border-radius:12px;display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-family:'Playfair Display',serif;font-size:18px;box-shadow:0 10px 28px rgba(123,31,26,0.12);
+    }
+    nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0}
+    nav a{font-weight:600}
+
+    /* Hero */
+    .hero{
+      display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;padding:44px 6vw 36px;overflow:visible;
+    }
+    .hero h1{font-family:'Playfair Display',serif;font-size:42px;margin:0 0 6px;color:var(--accent)}
+    .hero p{margin:0;color:var(--muted);max-width:64ch}
+
+    /* Shimmer title */
+    .shimmer{
+      background:linear-gradient(90deg,#e9e2dc 20%, #f6d7b1 40%, #e9e2dc 60%);
+      background-size:200% 100%;
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      animation:shimmer 2.6s linear infinite;
+      display:inline-block;
+    }
+    @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+
+    /* Fade-up entrance */
+    .fade-up{opacity:0;transform:translateY(12px);animation:fadeUp .6s forwards}
+    .st-1{animation-delay:.06s}.st-2{animation-delay:.12s}.st-3{animation-delay:.18s}.st-4{animation-delay:.24s}
+    @keyframes fadeUp{to{opacity:1;transform:none}}
+
+    .card{background:var(--paper);border-radius:var(--radius);padding:18px;box-shadow:var(--card-shadow)}
+
+    /* Reservation form */
+    form label{display:block;font-size:13px;margin-top:12px;color:#333}
+    input,select,textarea{width:100%;padding:10px;border-radius:10px;border:1px solid #efe7e2;margin-top:8px;font-size:14px;background:#fff}
+    .btn{display:inline-block;padding:10px 14px;border-radius:10px;background:var(--accent);color:#fff;font-weight:700;border:none;cursor:pointer;margin-top:12px}
+    .btn-ghost{background:transparent;color:var(--accent);border:2px solid var(--accent)}
+
+    /* Menu layout */
+    .menu{padding:12px 6vw 56px}
+    .menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+    .dish{background:linear-gradient(180deg, rgba(255,255,255,0.98), #fff);border-radius:12px;padding:12px;display:flex;gap:12px;align-items:center;border:1px solid rgba(0,0,0,0.03);transition:transform .28s ease, box-shadow .28s ease}
+    .dish:hover{transform:translateY(-8px);box-shadow:0 22px 56px rgba(123,31,26,0.08)}
+    .dish img{width:96px;height:74px;object-fit:cover;border-radius:10px;flex-shrink:0;background:#f6efe8}
+    .dish h4{margin:0 0 6px;font-size:16px}
+    .hin{font-family:'Noto Sans Devanagari', sans-serif;color:var(--accent-2);font-weight:600;margin-left:8px;font-size:14px}
+    .price{font-weight:700;color:var(--accent)}
+
+    /* Category headings */
+    .cat{display:flex;align-items:center;gap:12px;margin:18px 0}
+    .cat h3{margin:0;font-size:20px}
+    .cat .orn{width:38px;height:38px;border-radius:50%;background:conic-gradient(from 120deg,var(--accent-2),var(--accent));}
+
+    /* Badges */
+    .badge{display:inline-block;padding:4px 8px;border-radius:999px;background:linear-gradient(90deg, rgba(245,154,32,0.12), rgba(123,31,26,0.06));font-size:12px;margin-right:6px}
+
+    /* Reviews */
+    .reviews{padding:12px 6vw 80px}
+    blockquote{background:#fff7f5;border-left:4px solid var(--accent-2);padding:14px;border-radius:8px;margin:12px 0}
+
+    /* Floating background gradient */
+    .bg-shift{position:fixed;right:-20%;top:-10%;width:60vmin;height:60vmin;z-index:-1;border-radius:50%;background:radial-gradient(circle at 30% 30%, rgba(245,154,32,0.14), rgba(123,31,26,0.08));filter:blur(40px);animation:shift 12s linear infinite}
+    @keyframes shift{0%{transform:translate(0,0)}50%{transform:translate(-10px,8px)}100%{transform:translate(0,0)}}
+
+    /* Pulse on CTA */
+    .pulse{animation:pulse 2.6s infinite}
+    @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(245,154,32,0.06)}70%{box-shadow:0 0 0 14px rgba(245,154,32,0)}100%{box-shadow:0 0 0 0 rgba(245,154,32,0)}}
+
+    /* Hero visual image styling (so you can drop your photo in images/hero.jpg) */
+    .hero-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+      display: block;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width:980px){.hero{grid-template-columns:1fr;padding:28px 5vw}.logo{width:56px;height:56px}}
+    @media (max-width:560px){nav ul{gap:10px;flex-wrap:wrap}}
+
+    /* Modal using :target */
+    .modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:20px;visibility:hidden;opacity:0;transition:opacity .18s}
+    .modal:target{visibility:visible;opacity:1}
+    .modal .modal-inner{width:100%;max-width:640px;background:#fff;padding:22px;border-radius:14px;box-shadow:0 18px 60px rgba(0,0,0,0.18)}
+    .modal .close{float:right;font-weight:700;color:#666}
+
+    footer{padding:28px 6vw;background:transparent;display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between}
+    .small{font-size:13px;color:var(--muted)}
+
+    /* small utilities */
+    .muted{color:var(--muted)}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    @media(max-width:520px){.grid-2{grid-template-columns:1fr}}
+
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Restaurant",
+    "name":"Masala Mandala",
+    "servesCuisine":"Indian",
+    "address":{
+      "@type":"PostalAddress",
+      "addressLocality":"Your City",
+      "addressRegion":"State"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- decorative floating gradient -->
+  <div class="bg-shift" aria-hidden="true"></div>
+
+  <header>
+    <!-- REMOVED the accidental <section class="hero"> that was previously inside header.
+         Header now only contains brand and nav as before. -->
+    <div class="brand">
+      <div class="logo">MM</div>
+      <div>
+        <div style="font-weight:800;line-height:1">Masala Mandala<br><span class="muted" style="font-weight:600;font-size:13px">मसाला मंडल</span></div>
+        <div class="small muted">Authentic · Warm · Spice-forward / पारंपरिक · स्वादिष्ट</div>
+      </div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#menu">Menu / मेन्यू</a></li>
+        <li><a href="#reserve">Reserve / रिज़र्व</a></li>
+        <li><a href="#reviews">Reviews / रिव्यू</a></li>
+        <li><a href="#contact">Contact / संपर्क</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <h1 class="fade-up st-1"><span class="shimmer">Flavours of India</span> — स्वादों की परंपरा</h1>
+        <p class="fade-up st-2">Welcome to <strong>Masala Mandala / मसाला मंडल</strong> — where family recipes, freshly toasted spices, and warm hospitality meet. Browse our bilingual menu and book a table. / पारंपरिक व्यंजन, ताज़ा मसाले और गर्मजोशी से परोसा गया भोजन। नीचे मेन्यू देखें और रिज़र्व करें।</p>
+
+        <div class="card fade-up st-3" style="margin-top:18px;display:flex;gap:12px;align-items:center;justify-content:space-between">
+          <div>
+            <div style="font-weight:700">Special Offer / स्पेशल ऑफर</div>
+            <div class="muted">Weekday Thali ₹199 (Mon–Thu) — Vegetarian option available. / वीकडे थाली ₹199 (सोमवार–गुरुवार) — शाकाहारी विकल्प उपलब्ध।</div>
+          </div>
+          <div>
+            <a href="#reserve" class="btn pulse">Reserve a Table / टेबल बुक करें</a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Visual placeholder: replace with hero image -->
+      <aside class="hero-visual card fade-up st-4" aria-hidden="true">
+        <!-- REPLACE the src below with your image file (e.g. images/hero.jpg) -->
+        <img src="restaurant.jpg">
+        <!-- If your image is at a different path, change the src accordingly -->
+      </aside>
+    </section>
+
+    <!-- Menu: larger bilingual menu with categories -->
+    <section id="menu" class="menu" aria-label="Menu">
+      <div class="cat"><div class="orn" aria-hidden="true"></div><h3>Starters / स्टार्टर</h3></div>
+      <div class="menu-grid" role="list">
+
+        <article class="dish fade-up st-1" role="listitem">
+          <img src="samosa.jpg" alt="Samosa">
+          <div>
+            <h4>Samosa <span class="hin">(समोसा)</span></h4>
+            <div class="muted">Crispy pastry filled with spiced potato & peas / मसालेदार आलू और मटर</div>
+            <div style="margin-top:8px"><span class="price">₹29</span> <span class="badge">V</span></div>
+          </div>
+        </article>
+
+        <article class="dish fade-up st-2" role="listitem">
+          <img src="paneer-tikka.jpg" alt="Paneer Tikka">
+          <div>
+            <h4>Paneer Tikka <span class="hin">(पनीर टिक्का)</span></h4>
+            <div class="muted">Charred cottage cheese with yogurt spices / दही और मसाले
+            </div>
+            <div style="margin-top:8px"><span class="price">₹249</span> <span class="badge">Vegetarian</span></div>
+          </div>
+        </article>
+
+        <article class="dish fade-up st-3" role="listitem">
+          <img src="Chicken Seekh Kebab.jpg">
+          <div>
+            <h4>Chicken Seekh Kebab <span class="hin">(चिकन सीक कबाब)</span></h4>
+            <div class="muted">Minced spiced chicken, skewered and grilled / मसालेदार कीमा, ग्रिल्ड</div>
+            <div style="margin-top:8px"><span class="price">₹299</span></div>
+          </div>
+        </article>
+
+        <article class="dish fade-up st-4" role="listitem">
+          <img src="Papdi Chaat.jpg" alt="Papdi Chaat">
+          <div>
+            <h4>Papdi Chaat <span class="hin">(पापड़ी चाट)</span></h4>
+            <div class="muted">Tangy-sweet street snack with tamarind & chutneys / खट्टा-मीठा स्ट्रीट स्नैक</div>
+            <div style="margin-top:8px"><span class="price">₹119</span></div>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="cat"><div class="orn" aria-hidden="true"></div><h3>Main Course / मुख्य व्यंजन</h3></div>
+      <div class="menu-grid" role="list">
+
+        <article class="dish fade-up st-1" role="listitem">
+          <img src="Butter Chicken.jpg" alt="Butter Chicken">
+          <div>
+            <h4>Butter Chicken <span class="hin">(बटर चिकन)</span></h4>
+            <div class="muted">Creamy tomato-based curry with tandoori chicken / मलाईदार टमाटर करी</div>
+            <div style="margin-top:8px"><span class="price">₹599</span><span class="badge">Chef's Special</span></div>
+          </div>
+        </article>
+
+        <article class="dish fade-up st-2" role="listitem">
+          <img src="Paneer Butter Masala.jpg" alt="Paneer Butter Masala">
+          <div>
+            <h4>Paneer Butter Masala <span class="hin">(पनीर बटर मसाला)</span></h4>
+            <div class="muted">Soft cottage cheese in rich tomato gravy / कोमल पनीर टमाटर ग्रेवी में</div>
+            <div style="margin-top:8px"><span class="price">₹449</span><span class="badge">Vegetarian</span></div>
+          </div>
+        </article>
+
+        <article class="dish fade-up st-3" role="listitem">
+          <img src="Kashmiri Rogan Josh.jpg" alt="Kashmiri Rogan Josh">
+          <div>
+            <h4>Kashmiri Rogan Josh <span class="hin">(रोगन जोश)</span></h4>
+            <div class="muted">Slow-cooked lamb in fragrant spices / खुशबूदार मसालों में धीमी आंच पर मट्ठन</div>
+            <div style="margin-top:8px"><span class="price">₹749</span></div>
+          </div>
+        </article>
+
+        <article class="dish fade-up st-4" role="listitem">
+          <img src="Dal Tadka.jpg" alt="Dal Tadka">
+          <div>
+            <h4>Dal Tadka <span class="hin">(दाल तड़का)</span></h4>
+            <div class="muted">Yellow lentils tempered with garlic & cumin / लहसुन और जीरा का तड़का</div>
+            <div style="margin-top:8px"><span class="price">₹259</span><span class="badge">V</span></div>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="cat"><div class="orn" aria-hidden="true"></div><h3>Breads & Rice / रोटी व चावल</h3></div>
+      <div class="menu-grid" role="list">
+
+        <article class="dish fade-up st-1" role="listitem">
+          <img src="Garlic Naan.jpg" alt="Garlic Naan">
+          <div>
+            <h4>Garlic Naan <span class="hin">(गार्लिक नान)</span></h4>
+            <div class="muted">Soft leavened bread with roasted garlic / लूजी हुई ब्रेड लहसुन के साथ</div>
+            <div style="margin-top:8px"><span class="price">₹59</span></div>
+          </div>
+        </article>
+
+        <article class="dish fade-up st-2" role="listitem">
+          <img src="Jeera Rice.jpg" alt="Jeera Rice">
+          <div>
+            <h4>Jeera Rice <span class="hin">(जीरा राइस)</span></h4>
+            <div class="muted">Fragrant cumin rice, a light accompaniment / सुगंधित जीरा चावल</div>
+            <div style="margin-top:8px"><span class="price">₹129</span></div>
+          </div>
+        </article>
+
+        <article class="dish fade-up st-3" role="listitem">
+          <img src="Hyderabadi Biryani.jpg" alt="Hyderabadi Biryani">
+          <div>
+            <h4>Hyderabadi Biryani <span class="hin">(हैदराबादी बिरयानी)</span></h4>
+            <div class="muted">Aromatic layered rice with marinated meat / खुशबूदार परतदार बिरयानी</div>
+            <div style="margin-top:8px"><span class="price">₹399</span><span class="badge">Popular</span></div>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="cat"><div class="orn" aria-hidden="true"></div><h3>Desserts & Drinks / मिठाई व पेय</h3></div>
+      <div class="menu-grid" role="list">
+
+        <article class="dish fade-up st-1" role="listitem">
+          <img src="Gulab Jamun.jpg" alt="Gulab Jamun">
+          <div>
+            <h4>Gulab Jamun <span class="hin">(गुलाब जामुन)</span></h4>
+            <div class="muted">Warm milk dumplings in rose syrup / गुलाब की चाशनी में गरम गोले</div>
+            <div style="margin-top:8px"><span class="price">₹89</span></div>
+          </div>
+        </article>
+
+        <article class="dish fade-up st-2" role="listitem">
+          <img src="Masala Chai.jpg" alt="Masala Chai">
+          <div>
+            <h4>Masala Chai <span class="hin">(मसाला चाय)</span></h4>
+            <div class="muted">Spiced tea brewed with milk & aromatics / दूध और मसालों के साथ बनी चाय</div>
+            <div style="margin-top:8px"><span class="price">₹59</span></div>
+          </div>
+        </article>
+
+        <article class="dish fade-up st-3" role="listitem">
+          <img src="Sweet Lassi.jpg" alt="Sweet Lassi">
+          <div>
+            <h4>Sweet Lassi <span class="hin">(मीठी लस्सी)</span></h4>
+            <div class="muted">Yogurt-based cooling drink, perfect with spicy food / मसालेदार भोजन के साथ उपयुक्त</div>
+            <div style="margin-top:8px"><span class="price">₹39</span></div>
+          </div>
+        </article>
+
+      </div>
+
+    </section>
+
+    <!-- Reservation card (HTML-only) -->
+    <section id="reserve" style="padding:12px 6vw 36px">
+      <aside class="card" aria-labelledby="reserve-heading">
+        <h3 id="reserve-heading">Reserve a Table / टेबल बुक करें</h3>
+        <p class="muted">This form uses <code>mailto:</code> (HTML-only). It opens the user's email client with the filled details. Replace the email address in <code>action</code> with your real reservations email. / यह फॉर्म आपके ईमेल क्लाइंट को खोलेगा। अपनी रियल ईमेल डालें।</p>
+
+        <form action="mailto:reservations@masalamandala.example" method="post" enctype="text/plain" aria-label="Reservation form">
+          <label for="name">Full name / नाम</label>
+          <input id="name" name="Name" type="text" placeholder="Your name / आपका नाम" required>
+
+          <label for="email">Email / ईमेल</label>
+          <input id="email" name="Email" type="email" placeholder="you@example.com" required>
+
+          <label for="phone">Phone / फ़ोन</label>
+          <input id="phone" name="Phone" type="tel" placeholder="+91 9xxxxxxxxx" pattern="[+0-9 \-()]{7,20}" required>
+
+          <div class="grid-2">
+            <div>
+              <label for="date">Date / तारीख</label>
+              <input id="date" name="Date" type="date" required>
+            </div>
+            <div>
+              <label for="time">Time / समय</label>
+              <input id="time" name="Time" type="time" required>
+            </div>
+          </div>
+
+          <label for="party">Party size / पार्टी साइज</label>
+          <input id="party" name="Party size" type="number" min="1" max="30" value="2" required>
+
+          <label for="seating">Seating preference / बैठने की पसंद</label>
+          <input list="seatings" id="seating" name="Seating" placeholder="Any / कोई">
+          <datalist id="seatings">
+            <option value="Indoor / अंदर">
+            <option value="Outdoor / बाहर">
+            <option value="Window table / खिड़की वाली मेज़">
+            <option value="Private booth / प्राइवेट बूथ">
+          </datalist>
+
+          <label for="requests">Special requests / विशेष अनुरोध</label>
+          <textarea id="requests" name="Requests" rows="3" placeholder="Allergies, celebrations, accessibility needs / एलर्जी, जश्न, जरूरत"></textarea>
+
+          <button class="btn" type="submit">Send Reservation / भेजें</button>
+          <a href="#confirm" class="btn btn-ghost" style="margin-left:8px">Preview / पूर्वावलोकन</a>
+        </form>
+      </aside>
+
+      <!-- Modal: Preview Confirmation (CSS-only) -->
+      <div id="confirm" class="modal" aria-hidden="true">
+        <div class="modal-inner">
+          <a class="close" href="#">✕</a>
+          <h3>Reservation Preview / आरक्षण पूर्वावलोकन</h3>
+          <p class="muted">This is a static preview; the actual message is created by your email client when you submit. / यह एक स्थिर पूर्वावलोकन है।</p>
+          <h4>Sample message / उदाहरण संदेश</h4>
+          <pre style="background:#fff8f6;padding:12px;border-radius:8px;border:1px dashed #f1d6c8">Name: [Your name]
+Email: [you@example.com]
+Phone: [+91...]
+Date: 2025-11-10
+Time: 19:30
+Party size: 4
+Seating: Window table
+Requests: Birthday celebration / जन्मदिन</pre>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Reviews -->
+    <section id="reviews" class="reviews" style="padding-top:0">
+      <div class="card">
+        <h2>Customer Reviews / ग्राहकों की समीक्षाएँ</h2>
+        <p class="muted">Share your experience — form below (mailto). / अपना अनुभव साझा करें।</p>
+
+        <blockquote>
+          <strong>Sneha R. / स्नेहा आर.</strong> — "Delicious biryani and warm hospitality. / लज़ीज बिरयानी और गर्मजोशी भरा स्वागत।"
+        </blockquote>
+        <blockquote>
+          <strong>Rahul M. / राहुल एम.</strong> — "Superb thali — reminded me of home. / शानदार थाली — घर की याद दिला दी।"
+        </blockquote>
+
+        <div style="margin-top:12px">
+          <form action="mailto:reviews@masalamandala.example" method="post" enctype="text/plain">
+            <label for="rname">Your name / आपका नाम</label>
+            <input id="rname" name="Name" type="text" required>
+            <label for="rating">Rating (1-5) / रेटिंग</label>
+            <input id="rating" name="Rating" type="number" min="1" max="5" value="5" required>
+            <label for="review">Your review / आपकी समीक्षा</label>
+            <textarea id="review" name="Review" rows="4" required></textarea>
+            <button class="btn" type="submit">Send Review / भेजें</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Info & FAQ -->
+    <section class="menu" aria-label="Info">
+      <h2>Info & FAQ / जानकारी</h2>
+      <details>
+        <summary>Do you offer vegetarian / vegetarian options? / क्या शाकाहारी ऑप्शन है?</summary>
+        <p class="muted">Yes — many dishes can be made vegetarian or vegan. Mention in requests. / हाँ — कई व्यंजन शाकाहारी या वेगन बन सकते हैं। अनुरोध में लिखें।</p>
+      </details>
+      <details>
+        <summary>Do you cater events? / क्या आप इवेंट के लिए कैटर करते हैं?</summary>
+        <p class="muted">Yes — contact us for customised catering packages. / हाँ — कस्टम पैकेज के लिए संपर्क करें।</p>
+      </details>
+    </section>
+
+  </main>
+
+  <footer id="contact">
+    <div>
+      <strong>Masala Mandala / मसाला मंडल</strong>
+      <div class="small muted">G-414 Sadar Bazaar, Mobile— +91-92116XXXXX</div>
+    </div>
+    <div class="small muted">© 2025 Masala Mandala — Bilingual demo site (HTML + CSS only).</div>
+  </footer>
+
+</body>
+</html>
